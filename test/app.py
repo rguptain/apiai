@@ -2,6 +2,7 @@
 
 import json
 import os.path
+from random import randint
 
 from flask import Flask
 from flask import request
@@ -13,6 +14,19 @@ app = Flask(__name__)
 @app.route('/swap')
 def hello():
     data = 'The Service Manual is located here: ' + "http://www.rockabilly.net/files/manuals/DVR-520H-service-manual.pdf"
+    res = makeWebhookResult(data)
+    print("Res:")
+    print(res)
+    return app.response_class(res, content_type='application/json')
+
+@app.route('/dvr')
+def isDvrOn():
+    data = "DVR is OFF"
+    num = randint(0,9)
+    if (num % 2 == 0):
+        data = "DVR is OFF"
+    else:
+        data = "DVR is ON"
     res = makeWebhookResult(data)
     print("Res:")
     print(res)
@@ -41,6 +55,42 @@ def webhook():
     r = make_response(res)
     r.headers['Content-Type'] = 'application/json'
     return r
+
+
+def processRequest(req):
+    if req.get("result").get("action") == "swapDVR":
+        data = 'The Service Manual is located here: ' + "http://www.rockabilly.net/files/manuals/DVR-520H-service-manual.pdf"
+        res = makeWebhookResult(data)
+        return res
+    if req.get("result").get("action") == "downgradeProfile":
+        data = index()
+        res = makeWebhookResult(data)
+        return res
+    if req.get("result").get("action") == "checkDVR":
+        data = "DVR is OFF"
+        num = randint(0,9)
+        if (num % 2 == 0):
+            data = "DVR is OFF"
+        else:
+            data = "DVR is ON"
+        res = makeWebhookResult(data)
+        return res
+
+def makeWebhookResult(data):
+    # print(json.dumps(item, indent=4))
+
+    speech = data
+
+    print("Response:")
+    print(speech)
+
+    return {
+        "speech": speech,
+        "displayText": speech,
+        # "data": data,
+        # "contextOut": [],
+        "source": "custom web hook"
+    }
 
 def index():
     counter = 0
@@ -71,32 +121,6 @@ def index():
         myFile.write(str(counter))
         myFile.close()
         return "Working on it"
-
-def processRequest(req):
-    if req.get("result").get("action") == "swapDVR":
-        data = 'The Service Manual is located here: ' + "http://www.rockabilly.net/files/manuals/DVR-520H-service-manual.pdf"
-        res = makeWebhookResult(data)
-        return res
-    if req.get("result").get("action") == "downgradeProfile":
-        data = index()
-        res = makeWebhookResult(data)
-        return res
-
-def makeWebhookResult(data):
-    # print(json.dumps(item, indent=4))
-
-    speech = data
-
-    print("Response:")
-    print(speech)
-
-    return {
-        "speech": speech,
-        "displayText": speech,
-        # "data": data,
-        # "contextOut": [],
-        "source": "custom web hook"
-    }
 
 
 if __name__ == '__main__':
