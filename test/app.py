@@ -3,6 +3,7 @@
 import json
 import os.path
 from random import randint
+import random
 
 from flask import Flask
 from flask import request
@@ -109,10 +110,11 @@ def index():
         myFile.close()
         
         if c < 5:
-            return "Working on it"
+            return "I am still working on it"
         else:
             os.remove(PATH)
-            return "Your Order Number is 123456"   
+            order_id = random.randint(100000000000,999999999999)
+            return "I have submitted the order successfully. Your Order Number is " + str(order_id)   
            
     else:
         print ("Either file is missing or is not readable")
