@@ -68,12 +68,12 @@ def processRequest(req):
         res = makeWebhookResult(data)
         return res
     if req.get("result").get("action") == "checkDVR":
-        data = "DVR is OFF"
+        data = "Hmm...I don't see the DVR Online. We'll have to try another DVR or port. Do you have another DVR you can try"
         num = randint(0,9)
         if (num % 2 == 0):
-            data = "DVR is OFF"
+            data = "Hmm...I don't see the DVR Online. We'll have to try another DVR or port. Do you have another DVR you can try"
         else:
-            data = "DVR is ON"
+            data = "Looks good. I see the DVR is Online from my side"
         res = makeWebhookResult(data)
         return res
 
@@ -96,6 +96,13 @@ def makeWebhookResult(data):
 def index():
     counter = 0
     PATH='./file.txt'
+    messages = [
+                'Working on Order now',
+                "Waiting for the order to flow in BBNS",
+                "Still waiting on the flow",
+                "Still Waiting",
+                "Thank you for waiting, I am working on it"
+            ]
 
     if os.path.isfile(PATH) and os.access(PATH, os.R_OK):
         print ("File exists and is readable")
@@ -110,7 +117,7 @@ def index():
         myFile.close()
         
         if c < 5:
-            return "I am still working on it"
+            return messages[c]
         else:
             os.remove(PATH)
             order_id = random.randint(100000000000,999999999999)
