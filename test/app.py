@@ -4,8 +4,6 @@ import json
 import os.path
 from random import randint
 import random
-from py2neo import Graph
-from pandas import DataFrame
 
 from flask import Flask, send_from_directory
 from flask import request
@@ -18,25 +16,9 @@ app = Flask(__name__, static_url_path='')
 def send_js(path):
     return send_from_directory('js', path)
 
-@app.route('/customer')
-def get_customer_details():
-    graph = Graph(password="neo4jai")
-    cus = graph.data("MATCH (a:Customer) RETURN a.name as name, a.ban as ban, a.bill as bill, a.phone as phone, a.packages as packages, a.channels as channels LIMIT 4")
-    df = DataFrame(cus)
-    data = 'Customer Details: Name=' + df.get_value(0, 'name') + ' BAN=' + df.get_value(0, 'ban') + ' Bill=' + df.get_value(0, 'bill')
-    res = makeWebhookResult(data)
-    print("Res:")
-    print(res)
-    return app.response_class(res, content_type='application/json')
-
-@app.route('/dvr')
-def isDvrOn():
-    data = "DVR is OFF"
-    num = randint(0,9)
-    if (num % 2 == 0):
-        data = "DVR is OFF"
-    else:
-        data = "DVR is ON"
+@app.route('/cbr')
+def checkCBR():
+    data = 'Sure, I can help with that, One moment while I retrieve that information for you. Can you confirm your CBR is 214972xxxx ?'
     res = makeWebhookResult(data)
     print("Res:")
     print(res)
@@ -68,15 +50,12 @@ def webhook():
 
 
 def processRequest(req):
-    if req.get("result").get("action") == "getCustomerDetails":
-        graph = Graph(password="neo4jai")
-        cus = graph.data("MATCH (a:Customer) RETURN a.name as name, a.ban as ban, a.bill as bill, a.phone as phone, a.packages as packages, a.channels as channels LIMIT 4")
-        df = DataFrame(cus)
-        data = 'Customer Details: Name=' + df.get_value(0, 'name') + ' BAN=' + df.get_value(0, 'ban') + ' Bill=' + df.get_value(0, 'bill')
-        res = makeWebhookResult(data)
-        return res
     if req.get("result").get("action") == "swapDVR":
         data = 'The Service Manual is located here: ' + "http://www.rockabilly.net/files/manuals/DVR-520H-service-manual.pdf"
+        res = makeWebhookResult(data)
+        return res
+    if req.get("result").get("action") == "checkCBR":
+        data = 'Sure, I can help with that, One moment while I retrieve that information for you. Can you confirm your CBR is 214972xxxx ?'
         res = makeWebhookResult(data)
         return res
     if req.get("result").get("action") == "downgradeProfile":
