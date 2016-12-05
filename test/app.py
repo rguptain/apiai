@@ -58,6 +58,18 @@ def processRequest(req):
         data = 'Sure, I can help with that, One moment while I retrieve that information for you. Can you confirm your CBR is 214972xxxx ?'
         res = makeWebhookResult(data)
         return res
+    if req.get("result").get("action") == "confirmBANandName":
+        data = 'Thanks for verifying the Customer name and the BAN. How can I help you today ?'
+        res = makeWebhookResult(data)
+        return res
+    if req.get("result").get("action") == "submitOMS":
+        data = 'Order 2xxxxxx6A was successfully submitted'
+        res = makeWebhookResult(data)
+        return res
+    if req.get("result").get("action") == "submitBBNMS":
+        data = 'Order completed successfully through BBNMS,  LPA shows we are on the new profile now.'
+        res = makeWebhookResult(data)
+        return res
     if req.get("result").get("action") == "downgradeProfile":
         data = index()
         res = makeWebhookResult(data)
