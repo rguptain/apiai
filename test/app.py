@@ -17,13 +17,14 @@ app = Flask(__name__, static_url_path='')
 def send_js(path):
     return send_from_directory('js', path)
 
-@app.route('/cbr')
-def checkCBR():
-    data = 'Sure, I can help with that, One moment while I retrieve that information for you. Can you confirm your CBR is 214972xxxx ?'
-    res = makeWebhookResult(data)
-    print("Res:")
-    print(res)
-    return app.response_class(res, content_type='application/json')
+@app.route('/agent')
+def checkAgent():
+    d = {'rg123q':'Ron Howard', 'vs098t':'Vladimir Putin', 'dd567p':'Dilip Kumar'}
+    agent_id = request.args.get('agent-id')
+    if agent_id is None:
+        return None
+
+    return d[agent_id]
 
 @app.route('/downgrade', methods=['POST'])
 def test():
@@ -49,8 +50,36 @@ def webhook():
     r.headers['Content-Type'] = 'application/json'
     return r
 
+def getAgentName(req):
+    d = {'rg123q':'Ron Howard', 'vs098t':'Vladimir Putin', 'dd567p':'Dilip Kumar'}
+    result = req.get("result")
+    parameters = result.get("parameters")
+    agent_id = parameters.get("agent-id")
+    if agent_id is None:
+        return None
+
+    return d[agent_id]
+
+def getSMEName(req):
+    d = {'rg123q':'Ron Howard', 'vs098t':'Vladimir Putin', 'dd567p':'Dilip Kumar'}
+    result = req.get("result")
+    parameters = result.get("parameters")
+    sme_id = parameters.get("sme-id")
+    if sme_id is None:
+        return None
+
+    return d[sme_id]
+
 
 def processRequest(req):
+    if req.get("result").get("action") == "getAgentName":
+        data = getAgentName(req)
+        res = makeWebhookResult(data)
+        return res
+    if req.get("result").get("action") == "getSMEName":
+       data = getSMEName(req)
+       res = makeWebhookResult(data)
+       return res
     if req.get("result").get("action") == "swapDVR":
         data = 'The Service Manual is located here: ' + "http://www.rockabilly.net/files/manuals/DVR-520H-service-manual.pdf"
         res = makeWebhookResult(data)
