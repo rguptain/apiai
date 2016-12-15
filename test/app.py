@@ -19,7 +19,7 @@ def send_js(path):
 
 @app.route('/agent')
 def checkAgent():
-    d = {'rg123q':'Ron Howard', 'vs098t':'Vladimir Putin', 'dd567p':'Dilip Kumar'}
+    d = {'rg123q':'Ron Howard', 'vs098t':'Vladimir Putin', 'dd567p':'Dilip Kumar', 'vc345w': 'Vasim S Akram'}
     agent_id = request.args.get('agent-id')
     if agent_id is None:
         return None
@@ -51,7 +51,7 @@ def webhook():
     return r
 
 def getAgentName(req):
-    d = {'rg123q':'Ron Howard', 'vs098t':'Vladimir Putin', 'dd567p':'Dilip Kumar'}
+    d = {'rg123q':'Ron Howard', 'vs098t':'Vladimir Putin', 'dd567p':'Dilip Kumar', 'vc345w': 'Vasim S Akram'}
     result = req.get("result")
     parameters = result.get("parameters")
     agent_id = parameters.get("agent-id")
@@ -61,7 +61,7 @@ def getAgentName(req):
     return d[agent_id]
 
 def getSMEName(req):
-    d = {'rg123q':'Ron Howard', 'vs098t':'Vladimir Putin', 'dd567p':'Dilip Kumar'}
+    d = {'rg123q':'Ron W Howard', 'vs098t':'Vladimir R Putin', 'dd567p':'Dilip Y Kumar', 'vc345w': 'Vasim S Akram'}
     result = req.get("result")
     parameters = result.get("parameters")
     sme_id = parameters.get("sme-id")
@@ -69,7 +69,6 @@ def getSMEName(req):
         return None
 
     return d[sme_id]
-
 
 def processRequest(req):
     if req.get("result").get("action") == "getAgentName":
@@ -125,6 +124,9 @@ def makeWebhookResult(data):
     return {
         "speech": speech,
         "displayText": speech,
+        "$FirstName": "Ron",
+        "$MiddleName": "W",
+        "$LastName": "Howard",
         # "data": data,
         # "contextOut": [],
         "source": "custom web hook"
