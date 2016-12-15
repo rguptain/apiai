@@ -122,11 +122,11 @@ def makeWebhookResult(data):
     print(speech)
 
     return {
+        "contextOut": [{"name":"weather", "lifespan":2, "parameters":{"city":"Rome"}}],
+        "data": {"$FirstName": "Ron", "$MIddleName":"W", "$LastName":"Howard"},
         "speech": speech,
         "displayText": speech,
-        "$FirstName": "Ron",
-        "$MiddleName": "W",
-        "$LastName": "Howard",
+ 
         # "data": data,
         # "contextOut": [],
         "source": "custom web hook"
