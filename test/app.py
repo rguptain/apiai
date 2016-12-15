@@ -122,8 +122,8 @@ def makeWebhookResult(data):
     print(speech)
 
     return {
-         "contextOut": {"$FirstName": "Ron", "$MIddleName":"W", "$LastName":"Howard"},
-        "datq": [{"name":"weather", "lifespan":2, "parameters":{"city":"Rome"}}],
+         "data": {"$FirstName": "Ron", "$MIddleName":"W", "$LastName":"Howard"},
+        "contextOut": [{"name":"weather", "lifespan":2, "parameters":{"$FirstName": "Ron", "$MIddleName":"W", "$LastName":"Howard"}}],
         "speech": speech,
         "displayText": speech,
  
