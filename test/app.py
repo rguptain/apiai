@@ -123,7 +123,7 @@ def makeWebhookResult(data):
 
     return {
          "data": {"$FirstName": "Ron", "$MIddleName":"W", "$LastName":"Howard"},
-        "contextOut": [{"name":"weather", "lifespan":2, "parameters":{"$FirstName": "Ron", "$MIddleName":"W", "$LastName":"Howard"}}],
+        "contextOut": [{"name":"weather", "lifespan":2, "parameters":{"geo-city":"Rome", "ambience":"Rome", "temp":"10 F"}}],
         "speech": speech,
         "displayText": speech,
  
