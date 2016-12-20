@@ -17,10 +17,10 @@ app = Flask(__name__, static_url_path='')
 def send_js(path):
     return send_from_directory('js', path)
 
-@app.route('/agent')
+@app.route('/technician')
 def checkAgent():
-    d = {'rg123q':'Ron Howard', 'vs098t':'Vladimir Putin', 'dd567p':'Dilip Kumar', 'vc345w': 'Vasim S Akram'}
-    agent_id = request.args.get('agent-id')
+    d = {'rg123q':'Ron Howard', 'vs098t':'Vladimir Putin', 'dd567p':'Dilip Kumar', 'vc345w': 'Vasim S Akram', 'dp345e':'Divya Rana'}
+    agent_id = request.args.get('tech-id')
     if agent_id is None:
         return None
 
@@ -51,17 +51,17 @@ def webhook():
     return r
 
 def getAgentName(req):
-    d = {'rg123q':'Ron Howard', 'vs098t':'Vladimir Putin', 'dd567p':'Dilip Kumar', 'vc345w': 'Vasim S Akram'}
+    d = {'rg123q':'Ron Howard', 'vs098t':'Vladimir Putin', 'dd567p':'Dilip Kumar', 'vc345w': 'Vasim S Akram', 'dp345e':'Divya Rana'}
     result = req.get("result")
     parameters = result.get("parameters")
-    agent_id = parameters.get("agent-id")
+    agent_id = parameters.get("tech-id")
     if agent_id is None:
         return None
 
     return d[agent_id]
 
 def getSMEName(req):
-    d = {'rg123q':'Ron W Howard', 'vs098t':'Vladimir R Putin', 'dd567p':'Dilip Y Kumar', 'vc345w': 'Vasim S Akram'}
+    d = {'rg123q':'Ron Howard', 'vs098t':'Vladimir Putin', 'dd567p':'Dilip Kumar', 'vc345w': 'Vasim S Akram', 'dp345e':'Divya Rana'}
     result = req.get("result")
     parameters = result.get("parameters")
     sme_id = parameters.get("sme-id")
@@ -123,9 +123,9 @@ def makeWebhookResult(data):
 
     return {
          "data": {"$FirstName": "Ron", "$MIddleName":"W", "$LastName":"Howard"},
-        "contextOut": [{"name":"weather", "lifespan":2, "parameters":{"geo-city":"Rome", "ambience":"Rome", "temp":"10 F"}}],
+        "contextOut": [{"name":"technician", "lifespan":2, "parameters":{"tech-id":"Rome", "tech-name":"Rome"}}],
         "speech": speech,
-        "displayText": speech,
+        "displayText": "F",
  
         # "data": data,
         # "contextOut": [],
