@@ -23,9 +23,13 @@ def webhook():
     res = processRequest(req)
 
     res = json.dumps(res, indent=4)
-    # print(res)
+    
+    print("Response:")
+    print(res)
+    
     r = make_response(res)
     r.headers['Content-Type'] = 'application/json'
+    
     return r
 
 def processRequest(req):
@@ -33,9 +37,7 @@ def processRequest(req):
         data = getAgentName(req)
         ctx = createContext(req, data)
         res = makeWebhookResult(data, ctx)
-        print("Returned Result:")
-        pprint(res)
-    
+       
         return res
     
 def createContext(req, data):
@@ -54,9 +56,7 @@ def makeWebhookResult(data, ctx):
     result['contextOut'] = ctx
     result['source'] = "Custom Web Hook"
     
-    json_data = json.dumps(result)
-    
-    return json_data
+    return result
 
 def getAgentName(req):
     d = {'rg123q':'Ron Howard', 'vs098t':'Vladimir Putin', 'dd567p':'Dilip Kumar', 'vc345w': 'Vasim S Akram', 'dp345e':'Divya Rana'}
