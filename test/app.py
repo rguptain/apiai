@@ -6,16 +6,12 @@ import os.path
 from random import randint
 import random
 
-from flask import Flask, render_template
+from flask import Flask
 from flask import request
 from flask import make_response
 
 # Flask app should start in global layout
-app = Flask(__name__, static_url_path='/static')
-
-@app.route("/")
-def show_page():
-    return render_template("index.html")
+app = Flask(__name__)
 
 @app.route('/webhook', methods=['POST'])
 def webhook():
