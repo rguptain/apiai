@@ -5,7 +5,7 @@ import json
 import os.path
 from random import randint
 import random
-
+from collections import namedtuple
 from flask import Flask
 from flask import request
 from flask import make_response
@@ -31,12 +31,17 @@ def webhook():
 def processRequest(req):
     if req.get("result").get("action") == "getAgentName":
         data = getAgentName(req)
-        ctx = createContext(data)
+        ctx = createContext(req, data)
         res = makeWebhookResult(data, ctx)
         return res
     
-def createContext(data):
-        return [{"name":"technician", "lifespan":2, "parameters":{"tech-id":"rg123q", "tech-name":"Ron Howard"}}],
+def createContext(req, data):
+    result = req.get("result")
+    Context = namedtuple('Context', 'name lifespan')
+    contexts = [Context(**k) for k in result["contexts"]]
+    print("Context Tuple:")
+    print(contexts)
+    return [{"name":"technician", "lifespan":2, "parameters":{"tech-name":data}}],
 
 def makeWebhookResult(data, ctx):
 
