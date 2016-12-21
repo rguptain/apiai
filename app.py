@@ -46,16 +46,17 @@ def createContext(req, data):
     return [{"name":context_name, "lifespan":context_lifespan, "parameters":{"tech-name":data}}],
 
 def makeWebhookResult(data, ctx):
-
-    return
-    {
-        "speech": data,
-        "displayText": data,
-        "data": data,
-        "contextOut": ctx,
-        "source": "custom web hook"
-    }
-
+    result = {}
+    
+    result['speech'] = data
+    result['displayText'] = data
+    result['data'] = data
+    result['contextOut'] = ctx
+    result['source'] = "Custom Web Hook"
+    
+    json_data = json.dumps(result)
+    
+    return json_data
 
 def getAgentName(req):
     d = {'rg123q':'Ron Howard', 'vs098t':'Vladimir Putin', 'dd567p':'Dilip Kumar', 'vc345w': 'Vasim S Akram', 'dp345e':'Divya Rana'}
