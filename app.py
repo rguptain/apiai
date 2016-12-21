@@ -45,7 +45,7 @@ def createContext(req, data):
     context_name = str(input_data[0]["name"])
     context_lifespan = str(input_data[0]["lifespan"])
 
-    return [{"name":context_name, "lifespan":context_lifespan, "parameters":{"tech-name":data}}],
+    return {"name":context_name, "lifespan":context_lifespan, "parameters":{"tech-name":data}},
 
 def makeWebhookResult(data, ctx):
     result = {}
