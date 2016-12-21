@@ -1,0 +1,70 @@
+<html>
+<head>
+	<title>Smart Chat</title>
+	<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+	<script src="https://code.jquery.com/jquery-3.1.1.js" integrity="sha256-16cdPddA6VdVInumRGo6IbivbERE8p7CQR3HzTBuELA=" crossorigin="anonymous"></script>
+	<link type="text/css" rel="stylesheet" href="/static/css/index.css" />
+	<script src="/static/js/index.js"></script>
+</head>
+<body>
+	<div id="header" class="welcome_screen">
+		<img style="display: block;" src="/static/images/header.png" alt="" />
+	</div>
+	
+	<div id="prechat" class="welcome_screen">
+	<form>
+	  <fieldset>
+	    <legend>CHAT</legend>
+	   
+	    <label for="workgroup">ACD Category</label>
+	   <select  id="wgtc" multiple style="display: block;">
+	   	  <option value="lg" selected>Light Gig</option>
+		  <option value="co">Report Cable Outage</option>
+		</select>
+		
+		<label for="workgroup" class="required">BAN:</label><br/> 
+		<input type="text" id="ban" name="ban"  required><br/>
+		
+		<label  for="workgroup" class="required">CBR:</label><br/>
+	    <input id="tcbr" type="text" name="tcbr"  required><br/>
+	 
+		<label for="workgroup" class="required">Level 1:</label><br/>
+	    <select id="l1" multiple style="display: block;">
+	    	
+		</select>
+		
+		 <label for="workgroup" class="required">Technician ID:</label><br/>
+	    <select id="tan" multiple style="display: block;">
+		  <option value="volvo" selected>rg123q</option>
+		  <option value="saab">vs098t</option>
+		  <option value="mercedes">dd567p</option>
+		  <option value="audi">vc345w</option>
+		  <option value="toyota">dp345e</option>
+		</select>
+
+        <button type="submit" value="Submit" id="chat_btn">Chat</button>
+ 		<button type="reset" value="Reset">Reset</button>
+ 		<button type="reset" value="Reset">Search</button>
+	  </fieldset>
+	</form>
+	</div>
+	
+	<div id="chat" class="welcome_screen">
+	    <div id="menu">
+	        <p class="welcome">Welcome to AT&T Smart Chat</p>
+	        <input name="done" type="submit"  id="done" value="Done" />
+	        <div style="clear:both"></div>
+	    </div>
+	     
+	    <ul id="chatbox"></ul>
+	     
+	    <form name="message" action="">
+	        <input name="usermsg" type="text" id="input" size="63" />
+	        <input name="submitmsg" type="submit"  id="submitmsg" value="Send" />
+	    </form>
+	</div>
+	<div id="footer" class="welcome_screen">
+		<img style="display: block;" src="/static/images/footer.png" alt="" />
+	</div>
+</body>
+</html>
