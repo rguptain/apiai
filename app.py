@@ -37,11 +37,13 @@ def processRequest(req):
     
 def createContext(req, data):
     input_data = req.get("result").get("contexts")
+    context_name = input_data[0]["name"]
+    context_lifespan = input_data[0]["lifespan"]
     print("Context Name:")
-    pprint(input_date[0]["name"])
+    pprint(context_name)
     print("Context Lifespan:")
-    pprint(input_date[0]["lifespan"])
-    return [{"name":"technician", "lifespan":2, "parameters":{"tech-name":data}}],
+    pprint(context_lifespan)
+    return [{"name":context_name, "lifespan":context_lifesspan, "parameters":{"tech-name":data}}],
 
 def makeWebhookResult(data, ctx):
 
