@@ -36,11 +36,11 @@ def processRequest(req):
         return res
     
 def createContext(req, data):
-    result = req.get("result")
-    Context = namedtuple('Context', 'name lifespan')
-    contexts = [Context(**k) for k in result["contexts"]]
+    input_data = req.get("result").get("contexts")
+    parsed_input = json.loads(input_data)
+
     print("Context Tuple:")
-    print(contexts)
+    print(json.dumps(parsed_input))
     return [{"name":"technician", "lifespan":2, "parameters":{"tech-name":data}}],
 
 def makeWebhookResult(data, ctx):
