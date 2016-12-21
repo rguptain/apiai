@@ -5,7 +5,7 @@ import json
 import os.path
 from random import randint
 import random
-from collections import namedtuple
+from pprint import pprint
 from flask import Flask
 from flask import request
 from flask import make_response
@@ -37,10 +37,10 @@ def processRequest(req):
     
 def createContext(req, data):
     input_data = req.get("result").get("contexts")
-    parsed_input = json.loads(input_data)
-
-    print("Context Tuple:")
-    print(json.dumps(parsed_input))
+    print("Context Name:")
+    pprint(input_date[0]["name"])
+    print("Context Lifespan:")
+    pprint(input_date[0]["lifespan"])
     return [{"name":"technician", "lifespan":2, "parameters":{"tech-name":data}}],
 
 def makeWebhookResult(data, ctx):
