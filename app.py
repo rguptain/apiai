@@ -50,13 +50,13 @@ def makeWebhookResult(data, ctx):
     
     result['speech'] = data
     result['displayText'] = data
-    result['data'] = data
+    result['data'] = {"att": {"MSG"}}
     result['contextOut'] = ctx
     result['source'] = "Custom Web Hook"
     
-    json_data = json.dumps(result)
+  #  json_data = json.dumps(result)
     
-    return json_data
+    return result
 
 def getAgentName(req):
     d = {'rg123q':'Ron Howard', 'vs098t':'Vladimir Putin', 'dd567p':'Dilip Kumar', 'vc345w': 'Vasim S Akram', 'dp345e':'Divya Rana'}
