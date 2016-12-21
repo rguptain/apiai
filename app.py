@@ -33,6 +33,9 @@ def processRequest(req):
         data = getAgentName(req)
         ctx = createContext(req, data)
         res = makeWebhookResult(data, ctx)
+        print("Returned Result:")
+        pprint(res)
+    
         return res
     
 def createContext(req, data):
@@ -44,10 +47,6 @@ def createContext(req, data):
 
 def makeWebhookResult(data, ctx):
 
-    print("Data:")
-    pprint(data)
-    print("Out Context:")
-    pprint(ctx)
     return
     {
         "speech": data,
