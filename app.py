@@ -43,7 +43,7 @@ def createContext(req, data):
     pprint(context_name)
     print("Context Lifespan:")
     pprint(context_lifespan)
-    return [{"name":context_name, "lifespan":context_lifesspan, "parameters":{"tech-name":data}}],
+    return [{"name":context_name, "lifespan":context_lifespan, "parameters":{"tech-name":data}}],
 
 def makeWebhookResult(data, ctx):
 
