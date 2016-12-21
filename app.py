@@ -50,7 +50,7 @@ def makeWebhookResult(data, ctx):
     
     result['speech'] = data
     result['displayText'] = data
-    result['data'] = {"att": {"MSG"}}
+    result['data'] = data
     result['contextOut'] = ctx
     result['source'] = "Custom Web Hook"
     
